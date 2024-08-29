@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+@model IEnumerable<AplicacionTiempoReal.Models.Alumnos>
+
+<h2>Lista de Alumnos</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody id="alumnoList">
+        @foreach (var alumno in Model)
+        {
+            <tr id="alumno-@alumno.AlumnoId">
+                <td>@alumno.AlumnoId</td>
+                <td>@alumno.nombre</td>
+                <td>
+                    <button class="btn btn-primary" onclick="updateAlumno(@alumno.AlumnoId)">Actualizar</button>
+                    <button class="btn btn-danger" onclick="deleteAlumno(@alumno.AlumnoId)">Eliminar</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Aquí se añadiría el formulario para agregar nuevos alumnos -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.7/signalr.min.js"></script>
+<script type="text/javascript">
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/PopulationHub")
+        .build();
+
+    connection.on("ReceiveMessage", function (action, alumno) {
+        if (action === "ProductAdded") {
+            // Manejar la adición de alumnos
+        } else if (action === "ProductUpdated") {
+            // Manejar la actualización de alumnos
+        } else if (action === "ProductDeleted") {
+            // Manejar la eliminación de alumnos
+        }
+    });
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+</script>

@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="list">
+    <!-- Aquí se actualizará la lista de alumnos -->
+    <table id="alumnosTable" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th class="bg-warning">Correo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas de datos se insertarán aquí -->
+        </tbody>
+    </table>
+</div>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script>
+    // Construir la conexión con el Hub de SignalR
+    var conexion = new signalR.HubConnectionBuilder()
+        .withUrl("/PopulationHub")
+        .build();
+
+    // Iniciar la conexión
+    conexion.start()
+        .then(() => console.log("Conectado a SignalR"))
+        .catch((err) => console.error("Error al conectar a SignalR: ", err));
+
+    // Escuchar el evento 'Receptorlistas' para recibir la lista de alumnos
+    conexion.on("Receptorlistas", (alumnos) => {
+        console.log("Recibiendo lista de alumnos...");
+        console.log(alumnos); // Verificar la lista en la consola
+
+        // Llamar a la función que actualiza la tabla
+        actualizarTabla(alumnos);
+    });
+
+    // Función para actualizar la tabla con los datos recibidos
+    function actualizarTabla(alumnos) {
+        var tbody = document.querySelector("#alumnosTable tbody");
+
+        // Limpiar el contenido anterior de la tabla
+        tbody.innerHTML = "";
+
+        // Recorrer la lista de alumnos y crear filas para la tabla
+        alumnos.forEach(alumno => {
+            var fila = document.createElement("tr");
+
+            var celdaId = document.createElement("td");
+            celdaId.textContent = alumno.alumnoId;
+            fila.appendChild(celdaId);
+
+            var celdaNombre = document.createElement("td");
+            celdaNombre.textContent = alumno.nombre;
+            fila.appendChild(celdaNombre);
+
+            var celdaApellido = document.createElement("td");
+            celdaApellido.textContent = alumno.apellido;
+            fila.appendChild(celdaApellido);
+
+            var celdaCorreo = document.createElement("td");
+            celdaCorreo.textContent = alumno.correo;
+            fila.appendChild(celdaCorreo);
+
+            // Agregar la fila al tbody de la tabla
+            tbody.appendChild(fila);
+        });
+    }
+</script>
