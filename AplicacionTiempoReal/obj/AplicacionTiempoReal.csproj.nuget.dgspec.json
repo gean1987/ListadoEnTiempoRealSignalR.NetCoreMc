@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\RENZO\\source\\repos\\cursoDeCore\\JsonObjetos\\AplicacionTiempoReal\\AplicacionTiempoReal\\AplicacionTiempoReal.csproj": {}
+    "C:\\Users\\geanc\\Source\\Repos\\ListadoEnTiempoRealSignalR.NetCoreMc2\\AplicacionTiempoReal\\AplicacionTiempoReal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\RENZO\\source\\repos\\cursoDeCore\\JsonObjetos\\AplicacionTiempoReal\\AplicacionTiempoReal\\AplicacionTiempoReal.csproj": {
+    "C:\\Users\\geanc\\Source\\Repos\\ListadoEnTiempoRealSignalR.NetCoreMc2\\AplicacionTiempoReal\\AplicacionTiempoReal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\RENZO\\source\\repos\\cursoDeCore\\JsonObjetos\\AplicacionTiempoReal\\AplicacionTiempoReal\\AplicacionTiempoReal.csproj",
+        "projectUniqueName": "C:\\Users\\geanc\\Source\\Repos\\ListadoEnTiempoRealSignalR.NetCoreMc2\\AplicacionTiempoReal\\AplicacionTiempoReal.csproj",
         "projectName": "AplicacionTiempoReal",
-        "projectPath": "C:\\Users\\RENZO\\source\\repos\\cursoDeCore\\JsonObjetos\\AplicacionTiempoReal\\AplicacionTiempoReal\\AplicacionTiempoReal.csproj",
-        "packagesPath": "C:\\Users\\RENZO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\RENZO\\source\\repos\\cursoDeCore\\JsonObjetos\\AplicacionTiempoReal\\AplicacionTiempoReal\\obj\\",
+        "projectPath": "C:\\Users\\geanc\\Source\\Repos\\ListadoEnTiempoRealSignalR.NetCoreMc2\\AplicacionTiempoReal\\AplicacionTiempoReal.csproj",
+        "packagesPath": "C:\\Users\\geanc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\geanc\\Source\\Repos\\ListadoEnTiempoRealSignalR.NetCoreMc2\\AplicacionTiempoReal\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\RENZO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\geanc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -68,6 +74,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.36, 6.0.36]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -76,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.405\\RuntimeIdentifierGraph.json"
         }
       }
     }

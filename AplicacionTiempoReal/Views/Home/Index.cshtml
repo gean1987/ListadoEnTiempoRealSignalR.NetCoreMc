@@ -1,4 +1,5 @@
 ﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Especificamos el layout
     ViewData["Title"] = "Home Page";
 }
 
@@ -19,56 +20,68 @@
     </table>
 </div>
 
-<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<!-- Cargar dependencias correctamente -->
+<link rel="stylesheet" href="/api_gean_carlos/lib/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/api_gean_carlos/css/site.css">
+<script src="/api_gean_carlos/lib/jquery/dist/jquery.min.js"></script>
+<script src="/api_gean_carlos/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/api_gean_carlos/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+
 <script>
-    // Construir la conexión con el Hub de SignalR
-    var conexion = new signalR.HubConnectionBuilder()
-        .withUrl("/PopulationHub")
-        .build();
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("Iniciando conexión con SignalR...");
 
-    // Iniciar la conexión
-    conexion.start()
-        .then(() => console.log("Conectado a SignalR"))
-        .catch((err) => console.error("Error al conectar a SignalR: ", err));
+        // Construir la conexión con el Hub de SignalR
+        var conexion = new signalR.HubConnectionBuilder()
+            .withUrl("/api_gean_carlos/PopulationHub") // Usa la ruta correcta
+            .configureLogging(signalR.LogLevel.Information) // Agregar logs para depuración
+            .build();
 
-    // Escuchar el evento 'Receptorlistas' para recibir la lista de alumnos
-    conexion.on("Receptorlistas", (alumnos) => {
-        console.log("Recibiendo lista de alumnos...");
-        console.log(alumnos); // Verificar la lista en la consola
+        // Iniciar la conexión con validaciones
+        conexion.start()
+            .then(() => {
+                console.log("Conectado a SignalR");
+            })
+            .catch((err) => {
+                console.error("Error al conectar a SignalR: ", err);
+                alert("No se pudo conectar con el servidor. Verifica tu conexión.");
+            });
 
-        // Llamar a la función que actualiza la tabla
-        actualizarTabla(alumnos);
-    });
-
-    // Función para actualizar la tabla con los datos recibidos
-    function actualizarTabla(alumnos) {
-        var tbody = document.querySelector("#alumnosTable tbody");
-
-        // Limpiar el contenido anterior de la tabla
-        tbody.innerHTML = "";
-
-        // Recorrer la lista de alumnos y crear filas para la tabla
-        alumnos.forEach(alumno => {
-            var fila = document.createElement("tr");
-
-            var celdaId = document.createElement("td");
-            celdaId.textContent = alumno.alumnoId;
-            fila.appendChild(celdaId);
-
-            var celdaNombre = document.createElement("td");
-            celdaNombre.textContent = alumno.nombre;
-            fila.appendChild(celdaNombre);
-
-            var celdaApellido = document.createElement("td");
-            celdaApellido.textContent = alumno.apellido;
-            fila.appendChild(celdaApellido);
-
-            var celdaCorreo = document.createElement("td");
-            celdaCorreo.textContent = alumno.correo;
-            fila.appendChild(celdaCorreo);
-
-            // Agregar la fila al tbody de la tabla
-            tbody.appendChild(fila);
+        // Escuchar el evento 'Receptorlistas' para recibir la lista de alumnos
+        conexion.on("Receptorlistas", (alumnos) => {
+            console.log("Recibiendo lista de alumnos...");
+            console.log(alumnos); // Verificar la lista en la consola
+            actualizarTabla(alumnos);
         });
-    }
+
+        // Manejar desconexión y reintentos
+        conexion.onclose((error) => {
+            console.error("La conexión se ha cerrado: ", error);
+            alert("Se perdió la conexión con el servidor. Intentando reconectar...");
+            setTimeout(() => {
+                conexion.start()
+                    .then(() => console.log("Reconectado a SignalR"))
+                    .catch(err => console.error("Error al reconectar: ", err));
+            }, 5000);
+        });
+
+        // Función para actualizar la tabla con los datos recibidos
+        function actualizarTabla(alumnos) {
+            var tbody = document.querySelector("#alumnosTable tbody");
+            tbody.innerHTML = ""; // Limpiar la tabla
+
+            alumnos.forEach(alumno => {
+                var fila = document.createElement("tr");
+
+                fila.innerHTML = `
+                        <td>${alumno.alumnoId}</td>
+                        <td>${alumno.nombre}</td>
+                        <td>${alumno.apellido}</td>
+                        <td>${alumno.correo}</td>
+                    `;
+
+                tbody.appendChild(fila);
+            });
+        }
+    });
 </script>

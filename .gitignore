@@ -1,0 +1,31 @@
+# Archivos generados por Visual Studio
+.vs/
+.idea/
+.vscode/
+
+# Archivos binarios y de compilación
+bin/
+obj/
+out/
+
+# Archivos de configuración específicos de usuario
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Archivos de Visual Studio para macOS
+.vscode/
+
+# Archivos de contenedor de compilación
+*.dll
+*.exe
+*.pdb
+*.cache
+
+# Archivos de configuración de ASP.NET Core
+appsettings.json
+
+# Archivos temporales de usuario
+*.suo
+*.user

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AplicacionTiempoReal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7b5487eeccc439e79cf5b3dd4806c62381a0bca1")]
 [assembly: System.Reflection.AssemblyProductAttribute("AplicacionTiempoReal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AplicacionTiempoReal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
